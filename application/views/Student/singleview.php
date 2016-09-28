@@ -32,43 +32,41 @@ body
 
        			echo "student name &nbsp;";
        			echo form_input('Student name', $v->std_name);
-       	        echo"<br><br>";
+       	              echo"<br><br>";
 
-       	        echo "Student address &nbsp;";
+       	              echo "Student address &nbsp;";
        			echo form_input('Student address', $v->add_line1);
-       	        echo"<br><br>";
+       	              echo"<br><br>";
 
-       	        echo "zipcode &nbsp;";
+       	              echo "zipcode &nbsp;";
        			echo form_input('zipcode', $v->zipcode);
-       	        echo"<br><br>";
+       	              echo"<br><br>";
 
-       	        echo "city &nbsp;";
+       	              echo "city &nbsp;";
        			echo form_input('city', $v->city);
-       	        echo"<br><br>";
+       	              echo"<br><br>";
 
-       	        echo "state &nbsp;";
+       	              echo "state &nbsp;";
        			echo form_input('state', $v->state);
-       	        echo"<br><br>";
+       	              echo"<br><br>";
 
 
 
-       	    }
-
-
-       	    
+       	    } 
+                  
 			foreach ($skills as $v)
-       	    {
+       	       {
 				echo "student skill  &nbsp;";
        			echo form_input('Student skill', $v->skill);
-       	        echo"<br><br>";
+       	              echo"<br><br>";
        	   	}
 
-       	   	foreach ($courses as $key => $v) 
+       	   	         foreach ($courses as $key => $v) 
        	   	{
        	   		echo "Student course  &nbsp;";
        			echo form_input('Student course', $v->course_name);
-       	        echo"<br><br>";
-       	    }
+       	              echo"<br><br>";
+       	       }
 
 		 ?>
 

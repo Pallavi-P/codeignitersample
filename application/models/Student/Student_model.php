@@ -15,7 +15,6 @@ class Student_model extends CI_Model
 
 
 
-
 	function insertdata($data)
 	{
 		
@@ -59,8 +58,8 @@ class Student_model extends CI_Model
 		$this->db->like('std_id',$std_id);
 		$query=$this->db->get('student');
 		return $query->result();
-	}
-*/
+	}*/
+
 
 
 
@@ -99,6 +98,34 @@ class Student_model extends CI_Model
 
 	}
 
+
+
+//private $student;
+private $skills;
+private $courses;
+
+
+	function getStudentRecord1($id)
+	{
+	    
+		$this->db->select('*');
+        $this->db->from('student s');
+		$this->db->where('s.std_id',$id);
+		$this->db->join('address', 'address.zipcode=s.zipcode');
+		//log_message('debug','get Student SQL'.$this->db->get_compiled_select());
+		$query = $this->db->get();
+
+		//$student=$query->result();
+	    $skills=$this->getStudentSkills($id);
+		$courses=getStudentCourses ($id);
+
+		return $student;
+
+	}
+
+
+
+
     
     function getStudentSkills($id){
 
@@ -113,9 +140,9 @@ class Student_model extends CI_Model
 		return $query->result();
     }
 
-    function getStudentCourses($id){
+    function getStudentCourses($id)
+    {
 
-    	//log_message('debug','Inside get Student Courses');
     	//$this->db->flush_cache();
     	$this->db->select('*');
         $this->db->from('student s');
@@ -133,7 +160,8 @@ class Student_model extends CI_Model
 
 
 
-	 function getLastInsertId(){
+	 function getLastInsertId()
+	 {
             $id=0;
             $query=$this->db->query("select LAST_INSERT_ID() as lastInsertID");
            $val=$query->result();

@@ -1,15 +1,28 @@
 <?php
-// thiss is comment line
+
 
 class student_controller extends CI_Controller
 {
+	//private $std_id;
+	
+	private $add_line1;
+	private $address;
+	private $zipcode;
+    private $city;
+    private $state;
+
+	
+
 	public function __construct()
 {
 	parent :: __construct();
 	$this->load->helper('array');
 	$this->load->helper('url');
-	// thiss is comment line
-	//$this->load->helper('form');
+	$this->load->model('Student/Student', '', TRUE);
+	$this->load->model('Student/Address', '', TRUE);
+	$this->load->model('Student/skills', '', TRUE);
+	$this->load->model('Student/Student_model');
+	
 }
 
 
@@ -53,13 +66,8 @@ class student_controller extends CI_Controller
 		$this->load->view('Student/addview',$data);
 	}
 
-	/*public function addUser()
-  {
-  	 
-  	 
+	
 
-  	 
-  }*/
 
 	function viewStudent($id)
 	{
@@ -69,11 +77,43 @@ class student_controller extends CI_Controller
 	}
 
 
+	function viewStudentJson($id)
+	{
+		$this->output->set_content_type('application/json');
+		$this->load->model('Student/Student_model');
+		$data= $this->Student_model->getStudentRecord($id);
+		echo json_encode($data);
+		
+	}
+
+
+
+	function viewStudent1($id)
+	{
+		  
+		$student = new Student ();
+		$student=$student->getStudent($id);
+		//$student= $student;
+
+		$address = new address ();
+		$data['student']= $address->getStudentadd($student);
+
+		//echo json_encode($data);
+		/*
+		$skills = new skills ();
+		$data['skill']= $skills->getStudentskill($id);*/
+		
+		$this->load->view('student/singleview1',$data);
+	}
+
+
+
+
 
 
 	function ViewRecordbyId()
 	{
-		//log_message('debug', "inside ViewRecordbyId");
+		
 		$this->load->model('Student/Student_model');
 		$data['val']= $this->Student_model->searchdata();
 		$data['skill']= $this->Student_model->searchskill();
@@ -89,7 +129,12 @@ class student_controller extends CI_Controller
       	$this->load->model('Student/Student_model');
 		$this->Student_model->UpdateStudent($std_id);
 
-	}	
+	}
+
+
+
+
+
 }
 ?>	
 
